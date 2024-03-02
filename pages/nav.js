@@ -1,13 +1,11 @@
-import { Inter } from 'next/font/google'
+import React from 'react'
 import Link from 'next/link'
-import styles from '../styles/custom.module.css'
 
-const inter = Inter({ subsets: ['latin'] })
 
-export default function Home () {
-  // console.log(styles)
+const Nav = () => {
   return (
-    <div className='d-flex justify-content-center align-items-center'>
+    <div>
+      <div className='d-flex justify-content-center align-items-center'>
       <nav className='navbar navbar-expand-lg'>
         <div className='container-fluid'>
             <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
@@ -35,5 +33,8 @@ export default function Home () {
         </div>
       </nav>
     </div>
+    </div>
   )
 }
+
+export default Nav
