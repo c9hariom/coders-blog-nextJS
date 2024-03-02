@@ -5,7 +5,6 @@ import styles from '../styles/custom.module.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home () {
-  // console.log(styles)
   return (
     <div className='d-flex justify-content-center align-items-center'>
       <nav className='navbar navbar-expand-lg'>
