@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react'
 import styles from '../styles/blog.module.css'
 import Link from 'next/link'
 
-const Blog = () => {
-  const [blogs, setBlogs] = useState(null)
+const Blog = (props) => {
+  const [blogs, setBlogs] = useState(props.data)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('http://localhost:3000/api/blogs/')
-      const data = await response.json()
-      setBlogs(data)
-    }
-    fetchData()
-  }, [])
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await fetch('http://localhost:3000/api/blogs/')
+  //     const data = await response.json()
+  //     setBlogs(data)
+  //   }
+  //   fetchData()
+  // }, [])
 
   return (
     <div className='container'>
@@ -115,3 +115,10 @@ const Blog = () => {
 }
 
 export default Blog
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const response = await fetch('http://localhost:3000/api/blogs/')
+  const data = await response.json()
+  return { props: { data } }
+}
