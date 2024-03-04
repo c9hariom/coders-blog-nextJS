@@ -1,17 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import styles from '../../styles/blogPost.module.css'
 
 const Slug = () => {
-    const router = useRouter()
-    const {slug} = router.query;
-    return (
+  const router = useRouter()
+
+  const [blog, setBlog] = useState(null)
+
+  const slug = router.query.slug
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (slug) {
+        const response = await fetch(
+          'http://localhost:3000/api/getBlog?blog=' + slug
+        )
+        const data = await response.json()
+        setBlog(data)
+      }
+    }
+    fetchData()
+  }, [slug])
+
+  return (
     <div className={`container ${styles.main}`}>
-        <div className={styles.center}>
-            <h3>Read the blog about : {slug}</h3>
+      {blog && (
+        <div>
+          <div className={styles.center}>
+            <h3>{blog.title}</h3>
+          </div>
+          <hr />
+          <p>{blog.content}</p>
         </div>
-        <hr />
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rem reiciendis magni aliquid ipsam voluptatibus cum adipisci, similique, debitis nam eligendi voluptas libero corporis accusantium non earum tenetur repellat veritatis ad optio ullam esse? In debitis, quod numquam rerum veritatis repudiandae modi vel cum consequuntur nihil amet unde culpa porro iste corrupti velit, fuga aut incidunt magni molestiae aspernatur, neque aliquam! Impedit magnam quidem porro earum nulla, iste blanditiis et voluptas suscipit unde esse vero neque incidunt architecto assumenda temporibus adipisci pariatur perferendis odio nostrum, eveniet voluptatum at corrupti aliquid? Eligendi doloremque voluptas atque aut eius nulla possimus laudantium, et vitae hic? Consequuntur tempora maxime ipsa possimus fugit itaque assumenda deleniti libero sint beatae sunt unde dicta non quam, vel reiciendis nobis ratione earum, quas veritatis, molestiae repellat voluptatibus laborum. Doloremque cum quidem illum officiis sed? Sed officia saepe cum inventore dolorem. Tenetur at pariatur beatae optio inventore magni maxime aspernatur ipsam atque ducimus cupiditate enim, id labore dolor! Exercitationem adipisci officiis quisquam? Minima beatae ullam, maiores quaerat mollitia rerum quos quidem provident aspernatur fuga magnam nostrum reiciendis, consequuntur assumenda iure voluptatum placeat facere alias enim odit. Enim, deserunt accusamus nulla tempore voluptates quia impedit suscipit fuga incidunt eligendi consequatur natus pariatur deleniti ipsa odio voluptas sequi, doloribus provident voluptatum illum officia? Reiciendis placeat magnam vitae quo voluptatibus fugiat natus hic numquam tenetur quod error autem vero temporibus, mollitia, ducimus iste, ab sunt laudantium. Quod porro aliquid corrupti repudiandae eos aperiam. Ex ut recusandae fugiat repudiandae facilis! Quisquam esse, non consequatur harum ipsa quaerat saepe molestias voluptas dolores, nihil eum adipisci impedit incidunt officia corrupti? Odio, excepturi similique? Illum impedit iusto vitae, dolor necessitatibus alias facilis repudiandae quidem, reprehenderit pariatur obcaecati, molestiae quasi blanditiis. Harum placeat, dolor necessitatibus ut cumque, nihil facilis perspiciatis, tempore ratione voluptatum tempora pariatur nisi suscipit veritatis culpa sapiente quas totam assumenda deserunt natus minus! Rem ipsam, dolores vel in sequi quas obcaecati doloremque recusandae rerum aliquid eius nemo cupiditate perferendis accusamus, repudiandae consequatur eaque voluptate amet deserunt ipsa et molestiae, ut corrupti! Vitae, eaque numquam eos dolore magni maiores placeat. Nam aperiam officia maiores perspiciatis suscipit maxime ducimus placeat rerum similique unde, neque illo aliquam ipsum doloribus, quidem reiciendis vitae mollitia, hic qui! Blanditiis doloremque facilis ducimus reiciendis autem ea, expedita adipisci, ullam quod, quos hic perspiciatis quisquam perferendis vitae temporibus nobis iusto quia qui ab odit dignissimos sapiente minus optio consequatur? Illo, at animi? Eligendi, nemo. Repudiandae exercitationem ipsum dolores, laborum tenetur nesciunt iure facilis velit sint esse, libero et perspiciatis, debitis adipisci sapiente consequuntur dignissimos incidunt beatae natus earum. Soluta ullam corrupti molestiae laudantium hic, reprehenderit esse voluptate pariatur? Magni numquam voluptatibus perspiciatis repellendus voluptate consequuntur voluptates obcaecati nemo adipisci pariatur, dolores eius aliquam, architecto, ipsa quam ea nam!</p>
+      )}
     </div>
   )
 }
