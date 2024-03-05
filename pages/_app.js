@@ -1,6 +1,7 @@
 import '@/styles/globals.css'
 import Nav from '../component/nav'
 import Head from 'next/head'
+import Footer from '@/component/footer'
 
 export default function App ({ Component, pageProps }) {
   return (
@@ -11,6 +12,7 @@ export default function App ({ Component, pageProps }) {
     </Head>
     <Nav></Nav>
       <Component {...pageProps} />
+    <Footer/>
     </>
   )
 }
