@@ -8,6 +8,9 @@ export default async function handler(req, res) {
     const totalResults = files.length;
     let data = [];
     for(let i=((page-1)*count); i< page*count ;i++){
+        if(i+1>totalResults){
+            break
+        }
         let data2 = await fs.readFile('blogposts/'+files[i],'utf-8');
         data2 = JSON.parse(data2)
         let temp ={}
