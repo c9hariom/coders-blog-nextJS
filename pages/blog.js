@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from '../styles/blog.module.css'
 import Link from 'next/link'
 import InfiniteScroll from "react-infinite-scroll-component";
+import Loading from '@/component/Loading';
 
 
 const Blog = (props) => {
@@ -25,7 +26,7 @@ const Blog = (props) => {
       const newData = await response.json()
       setBlogs(blogs.concat(newData.data));
       setPage(page+1);
-    }, 1000);
+    }, 1300);
   };
 
 
@@ -38,8 +39,13 @@ const Blog = (props) => {
             dataLength={blogs.length}
             next={fetchMoreData}
             hasMore={blogs.length<props.totalResults?true:false}
-            loader={<h4>Loading...</h4>}
+            loader={<Loading height="150" width="270"/>}
             className='row'
+            endMessage={
+              <p style={{ textAlign: 'center' }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }
           >
              {blogs &&
             blogs.map((data, index) => {
