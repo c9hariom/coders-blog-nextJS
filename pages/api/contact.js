@@ -1,7 +1,10 @@
 import { promises as fs } from 'fs'
 
 export default async function handler (req, res) {
-  try {
+    if(!req.body){
+        return res.status(200).json({'status':'api is working consider sending some data 😂'})
+    }
+    try {
     const requestData = {
       method: req.method,
       url: req.url,
