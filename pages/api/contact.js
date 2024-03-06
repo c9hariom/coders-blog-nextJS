@@ -11,9 +11,10 @@ export default async function handler (req, res) {
     const index = requestData.body.txtEmail.indexOf('@')
     const afterAt =
       index !== -1 ? requestData.body.txtEmail.slice(0, index) : ''
-
+    const files = await fs.readdir("contactData");
+    const temp = files.length
     const file = await fs.writeFile(
-      `contactData/${afterAt}.json`,
+      `contactData/${temp+1}-${afterAt}.json`,
       JSON.stringify(requestData.body)
     )
     res.status(200).json({ status: '200' })
