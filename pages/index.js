@@ -6,13 +6,14 @@ export default function Home () {
   function createMarkup () {
     return {
       __html:
-        "<center><h3>Coders-Nexus : A one stop solution for a coder's need</h3></center>"
+        "<center><h4>&lt;/codersblog&gt;</h4></center>"
     }
   }
 
   return (
     <div>
-      <div dangerouslySetInnerHTML={createMarkup()} />
+      <div className="mt-5" dangerouslySetInnerHTML={createMarkup()} />
+      <p className='m-5'>This is the home page of the coders blog</p>
     </div>
   )
 }
